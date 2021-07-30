@@ -3223,6 +3223,38 @@ class PlayState extends MusicBeatState
 					var singData:Int = Std.int(Math.abs(daNote.noteData));
 					dad.playAnim('sing' + dataSuffix[singData] + altAnim, true);
 
+					switch (Math.abs(daNote.noteData))
+					{
+						case 2:
+							dad.playAnim('singUP' + altAnim, true);
+							if(curSong.toLowerCase() == 'zavodila'){
+							gf.playAnim('scared', true);
+							FlxG.camera.shake(0.02,0.05);
+							camHUD.shake(0.03,0.01);
+							}
+						case 3:
+							dad.playAnim('singRIGHT' + altAnim, true);
+							if(curSong.toLowerCase() == 'zavodila'){
+							gf.playAnim('scared', true);
+							FlxG.camera.shake(0.02,0.05);
+							camHUD.shake(0.03,0.01);
+							}
+						case 1:
+							dad.playAnim('singDOWN' + altAnim, true);
+							if(curSong.toLowerCase() == 'zavodila'){
+							gf.playAnim('scared', true);
+							FlxG.camera.shake(0.02,0.05);
+							camHUD.shake(0.03,0.01);
+							}
+						case 0:
+							dad.playAnim('singLEFT' + altAnim, true);
+							if(curSong.toLowerCase() == 'zavodila'){
+							gf.playAnim('scared', true);
+							FlxG.camera.shake(0.02,0.05);
+							camHUD.shake(0.03,0.01);
+							}
+					}
+
 					if (FlxG.save.data.cpuStrums)
 					{
 						cpuStrums.forEach(function(spr:FlxSprite)
