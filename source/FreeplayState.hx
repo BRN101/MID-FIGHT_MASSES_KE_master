@@ -88,6 +88,7 @@ class FreeplayState extends MusicBeatState
 			FreeplayState.loadDiff(0,format,meta.songName,diffs);
 			FreeplayState.loadDiff(1,format,meta.songName,diffs);
 			FreeplayState.loadDiff(2,format,meta.songName,diffs);
+			FreeplayState.loadDiff(3,format,meta.songName,diffs);
 			FreeplayState.songData.set(meta.songName,diffs);
 			trace('loaded diffs for ' + meta.songName);
 
@@ -379,8 +380,8 @@ class FreeplayState extends MusicBeatState
 		curDifficulty += change;
 
 		if (curDifficulty < 0)
-			curDifficulty = 2;
-		if (curDifficulty > 2)
+			curDifficulty = 3;
+		if (curDifficulty > 3)
 			curDifficulty = 0;
 
 

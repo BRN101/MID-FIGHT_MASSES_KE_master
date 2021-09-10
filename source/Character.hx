@@ -382,26 +382,26 @@ class Character extends FlxSprite
 
 				playAnim('idle');
 			case 'sarvente':
-				tex = Paths.getSparrowAtlas('characters/sarvente_sheet', 'shared');
+				tex = Paths.getSparrowAtlas('sarvente_sheet', 'shared', true);
 				frames = tex;
-				animation.addByPrefix('idle', 'SarventeIdle', 24);
-				animation.addByPrefix('singUP', 'SarventeUp', 24);
-				animation.addByPrefix('singRIGHT', 'SarventeRight', 24);
-				animation.addByPrefix('singDOWN', 'SarventeDown', 24);
-				animation.addByPrefix('singLEFT', 'SarventeLeft', 24);
+				animation.addByPrefix('idle', 'SarventeIdle', 24, false);
+				animation.addByPrefix('singUP', 'SarventeUp', 24, false);
+				animation.addByPrefix('singRIGHT', 'SarventeRight', 24, false);
+				animation.addByPrefix('singDOWN', 'SarventeDown', 24, false);
+				animation.addByPrefix('singLEFT', 'SarventeLeft', 24, false);
 	
 				loadOffsetFile(curCharacter);
 					
 				playAnim('idle');
 	
 			case 'sarvente-dark':
-				tex = Paths.getSparrowAtlas('characters/sarvente_dark', 'shared');
+				tex = Paths.getSparrowAtlas('sarvente_dark', 'shared', true);
 				frames = tex;
-				animation.addByPrefix('idle', 'SarvDarkIdle', 24);
-				animation.addByPrefix('singUP', 'SarvDarkUp', 24);
-				animation.addByPrefix('singRIGHT', 'SarvDarkRight', 24);
-				animation.addByPrefix('singDOWN', 'SarvDarkDown', 24);
-				animation.addByPrefix('singLEFT', 'SarvDarkLeft', 24);
+				animation.addByPrefix('idle', 'SarvDarkIdle', 24, false);
+				animation.addByPrefix('singUP', 'SarvDarkUp', 24, false);
+				animation.addByPrefix('singRIGHT', 'SarvDarkRight', 24, false);
+				animation.addByPrefix('singDOWN', 'SarvDarkDown', 24, false);
+				animation.addByPrefix('singLEFT', 'SarvDarkLeft', 24, false);
 
 				animation.addByPrefix('singUP-alt', 'SarvDarkUp2', 24, false);
 				animation.addByPrefix('singDOWN-alt', 'SarvDarkDown2', 24, false);
@@ -413,26 +413,26 @@ class Character extends FlxSprite
 				playAnim('idle');
 	
 			case 'ruv':
-				tex = Paths.getSparrowAtlas('characters/ruv_sheet', 'shared');
+				tex = Paths.getSparrowAtlas('ruv_sheet', 'shared', true);
 				frames = tex;
-				animation.addByPrefix('idle', 'RuvIdle', 24);
-				animation.addByPrefix('singUP', 'RuvUp', 24);
-				animation.addByPrefix('singRIGHT', 'RuvRight', 24);
-				animation.addByPrefix('singDOWN', 'RuvDown', 24);
-				animation.addByPrefix('singLEFT', 'RuvRight', 24);
+				animation.addByPrefix('idle', 'RuvIdle', 24, false);
+				animation.addByPrefix('singUP', 'RuvUp', 24, false);
+				animation.addByPrefix('singRIGHT', 'RuvRight', 24, false);
+				animation.addByPrefix('singDOWN', 'RuvDown', 24, false);
+				animation.addByPrefix('singLEFT', 'RuvLeft', 24, false);
 	
 				loadOffsetFile(curCharacter);
 	
 				playAnim('idle');
 	
 			case 'sarvente-lucifer':
-				tex = Paths.getSparrowAtlas('characters/smokinhotbabe', 'shared');
+				tex = Paths.getSparrowAtlas('smokinhotbabe', 'shared', true);
 				frames = tex;
-				animation.addByPrefix('idle', 'LuciferSarvIdle', 24);
-				animation.addByPrefix('singUP', 'LuciferSarvUp', 24);
-				animation.addByPrefix('singRIGHT', 'LuciferSarvRight', 24);
-				animation.addByPrefix('singDOWN', 'LuciferSarv', 24);
-				animation.addByPrefix('singLEFT', 'LuciferSarvLeft', 24);
+				animation.addByPrefix('idle', 'LuciferSarvIdle', 24, false);
+				animation.addByPrefix('singUP', 'LuciferSarvUp', 24, false);
+				animation.addByPrefix('singRIGHT', 'LuciferSarvRight', 24, false);
+				animation.addByPrefix('singDOWN', 'LuciferSarv', 24, false);
+				animation.addByPrefix('singLEFT', 'LuciferSarvLeft', 24, false);
 	
 				loadOffsetFile(curCharacter);
 

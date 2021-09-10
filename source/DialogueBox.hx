@@ -124,6 +124,15 @@ class DialogueBox extends FlxSpriteGroup
 				box.height = 200;
 				box.x = -100;
 				box.y = 390;
+			case 'gospel':
+				hasDialog = true;
+				box.frames = Paths.getSparrowAtlas('speech_bubble_talking');
+				box.animation.addByPrefix('normalOpen', 'Speech Bubble Normal Open', 24, false);
+				box.animation.addByIndices('normal', 'speech bubble normal', [11], "", 24);
+				box.width = 200;
+				box.height = 200;
+				box.x = -100;
+				box.y = 390;
 		}
 
 		this.dialogueList = dialogueList;
@@ -142,7 +151,7 @@ class DialogueBox extends FlxSpriteGroup
 		 add(portraitLeft);
 		 portraitLeft.visible = false;
 		}
-		else if (PlayState.SONG.song.toLowerCase() == 'parish' || PlayState.SONG.song.toLowerCase() == 'worship' || PlayState.SONG.song.toLowerCase() == 'zavodila')
+		else if (PlayState.SONG.song.toLowerCase() == 'parish' || PlayState.SONG.song.toLowerCase() == 'worship' || PlayState.SONG.song.toLowerCase() == 'zavodila' || PlayState.SONG.song.toLowerCase() == 'gospel')
 		{
 		 portraitLeft = new FlxSprite(100, 100);
 		 portraitLeft.frames = Paths.getSparrowAtlas('');
@@ -165,7 +174,7 @@ class DialogueBox extends FlxSpriteGroup
 		 add(portraitRight);
 		 portraitRight.visible = false;
 		}
-		else if (PlayState.SONG.song.toLowerCase() == 'parish' || PlayState.SONG.song.toLowerCase() == 'worship' || PlayState.SONG.song.toLowerCase() == 'zavodila')
+		else if (PlayState.SONG.song.toLowerCase() == 'parish' || PlayState.SONG.song.toLowerCase() == 'worship' || PlayState.SONG.song.toLowerCase() == 'zavodila' || PlayState.SONG.song.toLowerCase() == 'gospel')
 		{
 		 portraitRight = new FlxSprite(700, 100);
 		 portraitRight.frames = Paths.getSparrowAtlas('portraits/BF', 'shared');
@@ -221,7 +230,7 @@ class DialogueBox extends FlxSpriteGroup
 		 // add(dialogue);
 		}
 			
-		else if (PlayState.SONG.song.toLowerCase() == 'parish' || PlayState.SONG.song.toLowerCase() == 'worship' || PlayState.SONG.song.toLowerCase() == 'zavodila')
+		else if (PlayState.SONG.song.toLowerCase() == 'parish' || PlayState.SONG.song.toLowerCase() == 'worship' || PlayState.SONG.song.toLowerCase() == 'zavodila' || PlayState.SONG.song.toLowerCase() == 'gospel')
 		{
 			dropText = new FlxText(242, 502, Std.int(FlxG.width * 0.6), "", 32);
 			dropText.font = 'Komika Display';
@@ -310,7 +319,7 @@ class DialogueBox extends FlxSpriteGroup
 				{
 					isEnding = true;
 
-					if (PlayState.SONG.song.toLowerCase() == 'senpai' || PlayState.SONG.song.toLowerCase() == 'thorns' || PlayState.SONG.song.toLowerCase() == 'parish' || PlayState.SONG.song.toLowerCase() == 'worship' || PlayState.SONG.song.toLowerCase() == 'zavodila')
+					if (PlayState.SONG.song.toLowerCase() == 'senpai' || PlayState.SONG.song.toLowerCase() == 'thorns' || PlayState.SONG.song.toLowerCase() == 'parish' || PlayState.SONG.song.toLowerCase() == 'worship' || PlayState.SONG.song.toLowerCase() == 'zavodila' || PlayState.SONG.song.toLowerCase() == 'gospel')
 						FlxG.sound.music.fadeOut(2.2, 0);
 
 					new FlxTimer().start(0.2, function(tmr:FlxTimer)

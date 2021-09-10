@@ -149,6 +149,7 @@ class PlayState extends MusicBeatState
 
 	private var camZooming:Bool = false;
 	private var curSong:String = "";
+	private var floatshit:Float = 0;
 
 	private var gfSpeed:Int = 1;
 
@@ -201,6 +202,7 @@ class PlayState extends MusicBeatState
 	var trainSound:FlxSound;
 
 	var limo:FlxSprite;
+	var pillar:FlxSprite;
 	var grpLimoDancers:FlxTypedGroup<BackgroundDancer>;
 	var fastCar:FlxSprite;
 	var songName:FlxText;
@@ -473,6 +475,8 @@ class PlayState extends MusicBeatState
 				dialogue = CoolUtil.coolTextFile(Paths.txt('data/worship/worshipDialogue'));
 			case 'zavodila':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('data/zavodila/zavodilaDialogue'));
+			case 'gospel':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('data/gospel/gospelDialogue'));
 		}
 
 		// defaults if no stage was found in chart
@@ -953,13 +957,17 @@ class PlayState extends MusicBeatState
 						stageCurtains.active = false;
 			
 						add(stageCurtains);
-								
-						var stageCurtains:FlxSprite = new FlxSprite(-240, -630).loadGraphic(Paths.image('church3/pillarbroke'));
-						stageCurtains.updateHitbox();
-						stageCurtains.antialiasing = true;
-						stageCurtains.active = false;
+						
+						//var pillarTex = Paths.image('church3/pillarbroke');
+
+						//pillar = new FlxSprite(-120, 550);
+						var pillar:FlxSprite = new FlxSprite(-240, -630).loadGraphic(Paths.image('church3/pillarbroke'));
+						//pillar.sprite = pillarTex;
+						pillar.updateHitbox();
+						pillar.antialiasing = true;
+						pillar.active = true;
 			
-						add(stageCurtains);
+						//add(pillar);
 					}
 				case 'church4':
 					{
@@ -1151,7 +1159,7 @@ class PlayState extends MusicBeatState
 				dad.y += 110;
 			case 'sarvente-lucifer':
 				dad.scale.set(0.8, 0.8);
-				dad.y -= 300;
+				dad.y -= 330;
 				camPos.y -= 670;
 				camPos.x += 400;
 				dad.x -= 30;
@@ -1192,7 +1200,8 @@ class PlayState extends MusicBeatState
 				gf.scale.set(0.8, 0.8);
 				gf.x -= 50;
 				gf.y -= 60;
-				boyfriend.x += 55;
+			boyfriend.x += 55;
+			boyfriend.y += 80;
 	
 			case 'church2':
 				boyfriend.scale.set(0.8, 0.8);
@@ -1200,6 +1209,7 @@ class PlayState extends MusicBeatState
 				gf.x -= 50;
 				gf.y -= 60;
 				boyfriend.x += 55;
+				boyfriend.y += 80;
 	
 	
 			case 'church3':
@@ -1208,7 +1218,7 @@ class PlayState extends MusicBeatState
 				gf.x -= 50;
 				gf.y -= 60;
 				boyfriend.x += 55;
-	
+				boyfriend.y += 80;
 	
 			case 'church4':
 				boyfriend.scale.set(0.8, 0.8);
@@ -1216,6 +1226,7 @@ class PlayState extends MusicBeatState
 				gf.x -= 50;
 				gf.y -= 60;
 				boyfriend.x += 55;
+				boyfriend.y += 80;
 		}
 
 		if (!PlayStateChangeables.Optimize)
@@ -1225,9 +1236,11 @@ class PlayState extends MusicBeatState
 			// Shitty layering but whatev it works LOL
 			if (curStage == 'limo')
 				add(limo);
+			if (curStage == 'church3')
+				add(pillar);
 
-			add(dad);
-			add(boyfriend);
+			 add(dad);
+			 add(boyfriend);
 		}
 
 		if (loadRep)
@@ -1465,6 +1478,8 @@ class PlayState extends MusicBeatState
 					schoolIntro(doof);
 				case 'zavodila':
 					schoolIntro(doof);
+				case 'gospel':
+					schoolIntro(doof);
 				default:
 					startCountdown();
 			}
@@ -1562,6 +1577,84 @@ class PlayState extends MusicBeatState
 				else
 					startCountdown();
 
+				remove(black);
+			}
+		});
+	}
+
+	function gospelIntro(?dialogueBox:DialogueBox):Void
+	{
+		var black:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
+		black.scrollFactor.set();
+		add(black);
+		
+		var pink:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, 0xFFA9038C);
+		pink.scrollFactor.set();
+		
+		var sarvEvil:FlxSprite = new FlxSprite();
+		sarvEvil.frames = Paths.getSparrowAtlas('weeb/pegMePlease');
+		sarvEvil.animation.addByPrefix('idle', 'SarvTransAnim', 24, false);
+		sarvEvil.setGraphicSize(Std.int(sarvEvil.width * 6));
+		sarvEvil.scrollFactor.set();
+		sarvEvil.updateHitbox();
+		sarvEvil.screenCenter();
+		
+		if (StringTools.replace(PlayState.SONG.song, " ", "-").toLowerCase() == 'zavodila'
+			|| StringTools.replace(PlayState.SONG.song, " ", "-").toLowerCase() == 'gospel')
+		{
+			remove(black);
+		
+			if (StringTools.replace(PlayState.SONG.song, " ", "-").toLowerCase() == 'gospel')
+			{
+				add(pink);
+			}
+		}
+		
+		new FlxTimer().start(0.3, function(tmr:FlxTimer)
+		{
+			black.alpha -= 0.15;
+		
+			if (black.alpha > 0)
+			{
+				tmr.reset(0.3);
+			}
+			else
+			{
+				if (dialogueBox != null)
+				{
+					inCutscene = true;
+		
+					if (StringTools.replace(PlayState.SONG.song, " ", "-").toLowerCase() == 'gospel')
+					{
+						add(sarvEvil);
+						sarvEvil.alpha = 0;
+						new FlxTimer().start(0.3, function(swagTimer:FlxTimer)
+						{
+							sarvEvil.alpha = 1;
+							if (sarvEvil.alpha > 1)
+							{
+								swagTimer.reset();
+							}
+							else
+							{
+								sarvEvil.animation.play('idle');
+								FlxG.sound.play(Paths.sound('distorted_gospel'), 1, false, null, true, function()
+								{
+									remove(sarvEvil);
+									remove(pink);
+									add(dialogueBox);
+								});
+							}
+						});
+					}
+					else
+					{
+						add(dialogueBox);
+					}
+				}
+				else
+					startCountdown();
+		
 				remove(black);
 			}
 		});
@@ -2252,6 +2345,40 @@ class PlayState extends MusicBeatState
 							babyArrow.antialiasing = true;
 						}
 					babyArrow.setGraphicSize(Std.int(babyArrow.width * 0.7));
+
+				case 'hell':
+					babyArrow.frames = Paths.getSparrowAtlas('NOTE_assets2');
+					babyArrow.animation.addByPrefix('green', 'arrowUP');
+					babyArrow.animation.addByPrefix('blue', 'arrowDOWN');
+					babyArrow.animation.addByPrefix('purple', 'arrowLEFT');
+					babyArrow.animation.addByPrefix('red', 'arrowRIGHT');
+	
+					babyArrow.antialiasing = true;
+					babyArrow.setGraphicSize(Std.int(babyArrow.width * 0.7));
+	
+					switch (Math.abs(i))
+					{
+						case 0:
+							babyArrow.x += Note.swagWidth * 0;
+							babyArrow.animation.addByPrefix('static', 'arrowLEFT');
+							babyArrow.animation.addByPrefix('pressed', 'left press', 24, false);
+							babyArrow.animation.addByPrefix('confirm', 'left confirm', 24, false);
+						case 1:
+							babyArrow.x += Note.swagWidth * 1;
+							babyArrow.animation.addByPrefix('static', 'arrowDOWN');
+							babyArrow.animation.addByPrefix('pressed', 'down press', 24, false);
+							babyArrow.animation.addByPrefix('confirm', 'down confirm', 24, false);
+						case 2:
+							babyArrow.x += Note.swagWidth * 2;
+							babyArrow.animation.addByPrefix('static', 'arrowUP');
+							babyArrow.animation.addByPrefix('pressed', 'up press', 24, false);
+							babyArrow.animation.addByPrefix('confirm', 'up confirm', 24, false);
+						case 3:
+							babyArrow.x += Note.swagWidth * 3;
+							babyArrow.animation.addByPrefix('static', 'arrowRIGHT');
+							babyArrow.animation.addByPrefix('pressed', 'right press', 24, false);
+							babyArrow.animation.addByPrefix('confirm', 'right confirm', 24, false);
+						}
 			}
 
 			babyArrow.updateHitbox();
@@ -2421,6 +2548,7 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
+		floatshit += 0.01;
 		#if !debug
 		perfectMode = false;
 		#end
@@ -2652,7 +2780,9 @@ class PlayState extends MusicBeatState
 
 		// FlxG.watch.addQuick('VOL', vocals.amplitudeLeft);
 		// FlxG.watch.addQuick('VOLRight', vocals.amplitudeRight);
-
+		if (dad.curCharacter == "sarvente-lucifer"){
+			dad.y += Math.sin(floatshit);
+		}
 		iconP1.setGraphicSize(Std.int(FlxMath.lerp(150, iconP1.width, 0.50)));
 		iconP2.setGraphicSize(Std.int(FlxMath.lerp(150, iconP2.width, 0.50)));
 
@@ -2967,6 +3097,14 @@ class PlayState extends MusicBeatState
 					case 'schoolEvil':
 						camFollow.x = boyfriend.getMidpoint().x - 200;
 						camFollow.y = boyfriend.getMidpoint().y - 200;
+					case 'church1':
+						camFollow.y = boyfriend.getMidpoint().y - 200;
+					case 'church2':
+						camFollow.y = boyfriend.getMidpoint().y - 200;
+					case 'church3':
+						camFollow.y = boyfriend.getMidpoint().y - 200;
+					case 'church4':
+						camFollow.y = boyfriend.getMidpoint().y - 200;
 				}
 			}
 		}
@@ -3222,6 +3360,38 @@ class PlayState extends MusicBeatState
 					// Accessing the animation name directly to play it
 					var singData:Int = Std.int(Math.abs(daNote.noteData));
 					dad.playAnim('sing' + dataSuffix[singData] + altAnim, true);
+
+					switch (Math.abs(daNote.noteData))
+					{
+						case 2:
+							dad.playAnim('singUP' + altAnim, true);
+							if(curSong.toLowerCase() == 'zavodila'){
+							gf.playAnim('scared', true);
+							FlxG.camera.shake(0.02,0.05);
+							camHUD.shake(0.03,0.01);
+							}
+						case 3:
+							dad.playAnim('singRIGHT' + altAnim, true);
+							if(curSong.toLowerCase() == 'zavodila'){
+							gf.playAnim('scared', true);
+							FlxG.camera.shake(0.02,0.05);
+							camHUD.shake(0.03,0.01);
+							}
+						case 1:
+							dad.playAnim('singDOWN' + altAnim, true);
+							if(curSong.toLowerCase() == 'zavodila'){
+							gf.playAnim('scared', true);
+							FlxG.camera.shake(0.02,0.05);
+							camHUD.shake(0.03,0.01);
+							}
+						case 0:
+							dad.playAnim('singLEFT' + altAnim, true);
+							if(curSong.toLowerCase() == 'zavodila'){
+							gf.playAnim('scared', true);
+							FlxG.camera.shake(0.02,0.05);
+							camHUD.shake(0.03,0.01);
+							}
+					}
 
 					if (FlxG.save.data.cpuStrums)
 					{
