@@ -379,11 +379,22 @@ class FreeplayState extends MusicBeatState
 	{
 		curDifficulty += change;
 
-		if (curDifficulty < 0)
+		if (songs[curSelected].songName.toLowerCase() == 'casanova')
+		{
+			if (curDifficulty < 2)
 			curDifficulty = 3;
-		if (curDifficulty > 3)
-			curDifficulty = 0;
-
+		    if (curDifficulty > 3)
+			curDifficulty = 2;
+		}
+		else
+		{
+			if (curDifficulty < 0)
+				curDifficulty = 3;
+			if (curDifficulty > 3)
+				curDifficulty = 0;
+	
+		}
+		
 
 		// adjusting the highscore song name to be compatible (changeDiff)
 		var songHighscore = StringTools.replace(songs[curSelected].songName, " ", "-");
@@ -419,7 +430,10 @@ class FreeplayState extends MusicBeatState
 			curSelected = 0;
 
 		// selector.y = (70 * curSelected) + 30;
-		
+		if (songs[curSelected].songName.toLowerCase() == 'casanova')
+		{
+			changeDiff(3);
+		}
 		// adjusting the highscore song name to be compatible (changeSelection)
 		// would read original scores if we didn't change packages
 		var songHighscore = StringTools.replace(songs[curSelected].songName, " ", "-");

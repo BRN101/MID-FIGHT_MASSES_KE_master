@@ -49,6 +49,7 @@ class HealthIcon extends FlxSprite
 		animation.add('sarvente-dark', [30, 31], 0, false, isPlayer);
 		animation.add('ruv', [32, 33], 0, false, isPlayer);
 		animation.add('sarvente-lucifer', [34, 35], 0, false, isPlayer);
+		animation.add('selever', [36, 37], 0, false, isPlayer);
 		animation.play(char);
 
 		switch(char)

@@ -132,7 +132,7 @@ class TitleState extends MusicBeatState
 			logoBl.frames = Paths.getSparrowAtlas('KadeEngineLogoBumpin');
 		} else {
 			logoBl = new FlxSprite(-150, -100);
-			logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
+			logoBl.frames = Paths.getSparrowAtlas('KadeEngineLogoBumpin');
 		}
 		if(FlxG.save.data.antialiasing)
 			{
@@ -423,26 +423,32 @@ class TitleState extends MusicBeatState
 			// credTextShit.text = 'Shoutouts Tom Fulp';
 			// credTextShit.screenCenter();
 			case 9:
+				createCoolText(['Port by']);
+			case 10:
+				addMoreText('BRN');
+			case 11:
+				deleteCoolText();
+			case 12:
 				createCoolText([curWacky[0]]);
 			// credTextShit.visible = true;
-			case 11:
+			case 13:
 				addMoreText(curWacky[1]);
 			// credTextShit.text += '\nlmao';
-			case 12:
+			case 14:
 				deleteCoolText();
 			// credTextShit.visible = false;
 			// credTextShit.text = "Friday";
 			// credTextShit.screenCenter();
-			case 13:
+			case 15:
 				addMoreText('Friday');
 			// credTextShit.visible = true;
-			case 14:
+			case 16:
 				addMoreText('Night');
 			// credTextShit.text += '\nNight';
-			case 15:
+			case 17:
 				addMoreText('Funkin'); // credTextShit.text += '\nFunkin';
 
-			case 16:
+			case 18:
 				skipIntro();
 		}
 	}

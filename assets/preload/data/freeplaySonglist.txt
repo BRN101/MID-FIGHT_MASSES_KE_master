@@ -21,3 +21,4 @@ Parish:sarvente:7
 Worship:sarvente-dark:7
 Zavodila:ruv:7
 Gospel:sarvente-lucifer:7
+Casanova:selever:8

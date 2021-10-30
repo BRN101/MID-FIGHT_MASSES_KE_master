@@ -437,6 +437,20 @@ class Character extends FlxSprite
 				loadOffsetFile(curCharacter);
 
 				playAnim('idle');
+			
+			case 'selever':
+				tex = Paths.getSparrowAtlas('fuckboi_sheet', 'shared', true);
+				frames = tex;
+				animation.addByPrefix('idle', 'SelIdle', 24, false);
+				animation.addByPrefix('singUP', 'SelUp', 24, false);
+				animation.addByPrefix('singRIGHT', 'SelRight', 24, false);
+				animation.addByPrefix('singDOWN', 'SelDown', 24, false);
+				animation.addByPrefix('singLEFT', 'SelLeft', 24, false);
+				animation.addByPrefix('hey', 'SelHey', 24, false);
+	
+				loadOffsetFile(curCharacter);
+					
+				playAnim('idle');
 		}
 
 		dance();

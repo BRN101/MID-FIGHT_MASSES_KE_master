@@ -215,6 +215,7 @@ class PlayState extends MusicBeatState
 	var bgGirls:BackgroundGirls;
 	var wiggleShit:WiggleEffect = new WiggleEffect();
 
+	public var sarvTrail:FlxTrail; //si no funciona quitalo
 	var talking:Bool = true;
 
 	public var songScore:Int = 0;
@@ -477,6 +478,8 @@ class PlayState extends MusicBeatState
 				dialogue = CoolUtil.coolTextFile(Paths.txt('data/zavodila/zavodilaDialogue'));
 			case 'gospel':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('data/gospel/gospelDialogue'));
+			case 'casanova':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('data/casanova/casanovaDialogue'));
 		}
 
 		// defaults if no stage was found in chart
@@ -913,6 +916,7 @@ class PlayState extends MusicBeatState
 						stageCurtains.active = false;
 		
 						add(stageCurtains);
+
 					}
 				case 'church2':
 					{
@@ -957,12 +961,8 @@ class PlayState extends MusicBeatState
 						stageCurtains.active = false;
 			
 						add(stageCurtains);
-						
-						//var pillarTex = Paths.image('church3/pillarbroke');
 
-						//pillar = new FlxSprite(-120, 550);
-						var pillar:FlxSprite = new FlxSprite(-240, -630).loadGraphic(Paths.image('church3/pillarbroke'));
-						//pillar.sprite = pillarTex;
+						pillar = new FlxSprite(-240, -630).loadGraphic(Paths.image('church3/pillarbroke'));
 						pillar.updateHitbox();
 						pillar.antialiasing = true;
 						pillar.active = true;
@@ -1010,6 +1010,28 @@ class PlayState extends MusicBeatState
 						stageCurtains.antialiasing = true;
 						stageCurtains.active = false;
 			
+						add(stageCurtains);
+					}
+					case 'churchselever':
+					{
+						defaultCamZoom = 0.9;
+						curStage = 'churchselever';
+						var bg:FlxSprite = new FlxSprite(-265, -630).loadGraphic(Paths.image('churchselever/bg'));
+						bg.antialiasing = true;
+						bg.active = false;
+						add(bg);
+			
+						var stageFront:FlxSprite = new FlxSprite(-265, -630).loadGraphic(Paths.image('churchselever/floor'));
+						stageFront.updateHitbox();
+						stageFront.antialiasing = true;
+						stageFront.active = false;
+						add(stageFront);
+			
+						var stageCurtains:FlxSprite = new FlxSprite(-265, -630).loadGraphic(Paths.image('churchselever/pillars'));
+						stageCurtains.updateHitbox();
+						stageCurtains.antialiasing = true;
+						stageCurtains.active = false;
+		
 						add(stageCurtains);
 					}
 				default:
@@ -1140,29 +1162,66 @@ class PlayState extends MusicBeatState
 				dad.y += 100;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
 			case 'sarvente':
+				if (FlxG.save.data.distractions)
+					{
+						if (!PlayStateChangeables.Optimize)
+						{
+							sarvTrail = new FlxTrail(dad, null, 4, 24, 0.3, 0.069);
+							sarvTrail.color = 0xFFA9038C;
+						}
+					}
 				dad.scale.set(0.8, 0.8);
 				camPos.y -= 670;
 				camPos.x += 400;
 				dad.x -= 30;
 				dad.y += 110;
 			case 'sarvente-dark':
+				if (FlxG.save.data.distractions)
+					{
+						if (!PlayStateChangeables.Optimize)
+						{
+							sarvTrail = new FlxTrail(dad, null, 4, 24, 0.3, 0.069);
+							sarvTrail.color = 0xFFA9038C;
+						}
+					}
 				dad.scale.set(0.8, 0.8);
 				camPos.y -= 670;
 				camPos.x += 400;
 				dad.x -= 30;
 				dad.y += 110;
 			case 'ruv':
+				if (!PlayStateChangeables.Optimize)
+					{
+						sarvTrail = new FlxTrail(dad, null, 4, 24, 0.3, 0.069);
+						sarvTrail.color = 0xFF4B00A9;
+					}
 				dad.scale.set(0.8, 0.8);
 				camPos.y -= 670;
 				camPos.x += 400;
 				dad.x -= 30;
 				dad.y += 110;
 			case 'sarvente-lucifer':
+				if (!PlayStateChangeables.Optimize)
+					{
+						sarvTrail = new FlxTrail(dad, null, 4, 24, 0.3, 0.069);
+						sarvTrail.color = 0xFFA9038C;
+					}
 				dad.scale.set(0.8, 0.8);
 				dad.y -= 330;
 				camPos.y -= 670;
 				camPos.x += 400;
 				dad.x -= 30;
+			case 'selever':
+				if (!PlayStateChangeables.Optimize)
+					{
+						sarvTrail = new FlxTrail(dad, null, 4, 24, 0.3, 0.069);
+						sarvTrail.color = 0xFF972651;
+					}
+				camPos.y -= 670;
+				camPos.x += 400;
+				dad.scale.set(0.8, 0.8);
+				dad.x -= 30;
+				dad.y += 110;
 		}
 
 		boyfriend = new Boyfriend(770, 450, SONG.player1);
@@ -1221,6 +1280,13 @@ class PlayState extends MusicBeatState
 				boyfriend.y += 80;
 	
 			case 'church4':
+				boyfriend.scale.set(0.8, 0.8);
+				gf.scale.set(0.8, 0.8);
+				gf.x -= 50;
+				gf.y -= 60;
+				boyfriend.x += 55;
+				boyfriend.y += 80;
+			case 'churchselever':
 				boyfriend.scale.set(0.8, 0.8);
 				gf.scale.set(0.8, 0.8);
 				gf.x -= 50;
@@ -1350,6 +1416,31 @@ class PlayState extends MusicBeatState
 			'health', 0, 2);
 		healthBar.scrollFactor.set();
 		healthBar.createFilledBar(0xFFFF0000, 0xFF66FF33);
+		switch (dad.curCharacter)
+        {
+            case 'gf':
+              healthBar.createFilledBar(0xFFFF0000, 0xFF0097C4);
+            case 'dad' | 'mom-car' | 'parents-christmas':
+              healthBar.createFilledBar(0xFF5A07F5, 0xFF0097C4);
+            case 'spooky':
+              healthBar.createFilledBar(0xFFF57E07, 0xFF0097C4);
+            case 'monster-christmas' | 'monster':
+              healthBar.createFilledBar(0xFFF5DD07, 0xFF0097C4);
+            case 'pico':
+              healthBar.createFilledBar(0xFF52B514, 0xFF0097C4);
+            case 'senpai' | 'senpai-angry':
+              healthBar.createFilledBar(0xFFF76D6D, 0xFF0097C4);
+            case 'spirit':
+              healthBar.createFilledBar(0xFFAD0505, 0xFF0097C4);
+			case 'sarvente'| 'sarvente-dark' :
+			  healthBar.createFilledBar(0xFFF691C5, 0xFF0097C4);
+			case 'ruv':
+			  healthBar.createFilledBar(0xFF978AA6, 0xFF0097C4);
+			case 'sarvente-lucifer':
+			  healthBar.createFilledBar(0xFFDA317D, 0xFF0097C4);
+			case 'selever':
+			  healthBar.createFilledBar(0xFF972651, 0xFF0097C4);
+        }
 		// healthBar
 		add(healthBar);
 
@@ -1480,6 +1571,8 @@ class PlayState extends MusicBeatState
 					schoolIntro(doof);
 				case 'gospel':
 					schoolIntro(doof);
+				case 'casanova':
+					schoolIntro(doof);
 				default:
 					startCountdown();
 			}
@@ -1592,7 +1685,7 @@ class PlayState extends MusicBeatState
 		pink.scrollFactor.set();
 		
 		var sarvEvil:FlxSprite = new FlxSprite();
-		sarvEvil.frames = Paths.getSparrowAtlas('weeb/pegMePlease');
+		sarvEvil.frames = Paths.getSparrowAtlas('church4/pegMePlease');
 		sarvEvil.animation.addByPrefix('idle', 'SarvTransAnim', 24, false);
 		sarvEvil.setGraphicSize(Std.int(sarvEvil.width * 6));
 		sarvEvil.scrollFactor.set();
@@ -1624,27 +1717,18 @@ class PlayState extends MusicBeatState
 				{
 					inCutscene = true;
 		
-					if (StringTools.replace(PlayState.SONG.song, " ", "-").toLowerCase() == 'gospel')
+					if (SONG.song.toLowerCase() == 'gospel')
 					{
 						add(sarvEvil);
-						sarvEvil.alpha = 0;
-						new FlxTimer().start(0.3, function(swagTimer:FlxTimer)
+						sarvEvil.animation.play('idle');
+
+						FlxG.sound.play(Paths.sound('distorted_gospel'), 1, false, null, true, function()
 						{
-							sarvEvil.alpha = 1;
-							if (sarvEvil.alpha > 1)
-							{
-								swagTimer.reset();
-							}
-							else
-							{
-								sarvEvil.animation.play('idle');
-								FlxG.sound.play(Paths.sound('distorted_gospel'), 1, false, null, true, function()
-								{
-									remove(sarvEvil);
-									remove(pink);
+							remove(sarvEvil);
+							remove(pink);
+							add(dialogueBox);		
 									add(dialogueBox);
-								});
-							}
+							add(dialogueBox);		
 						});
 					}
 					else
@@ -3104,6 +3188,8 @@ class PlayState extends MusicBeatState
 					case 'church3':
 						camFollow.y = boyfriend.getMidpoint().y - 200;
 					case 'church4':
+						camFollow.y = boyfriend.getMidpoint().y - 200;
+					case 'churchselever':
 						camFollow.y = boyfriend.getMidpoint().y - 200;
 				}
 			}
@@ -4605,7 +4691,6 @@ class PlayState extends MusicBeatState
 				case 0:
 					boyfriend.playAnim('singLEFT', true);
 			}
-
 			#if windows
 			if (luaModchart != null)
 				luaModchart.executeState('playerOneSing', [note.noteData, Conductor.songPosition]);
@@ -4747,6 +4832,57 @@ class PlayState extends MusicBeatState
 		if (FlxG.sound.music.time > Conductor.songPosition + 20 || FlxG.sound.music.time < Conductor.songPosition - 20)
 		{
 			resyncVocals();
+		}
+		
+		if (dad.curCharacter == 'sarvente' && SONG.song.toLowerCase() == 'parish')
+		{
+			switch (curStep)
+			{
+				case 387:
+					add(sarvTrail);
+					case 451:
+					remove(sarvTrail);
+			}
+		}
+		if (dad.curCharacter == 'sarvente-dark' && SONG.song.toLowerCase() == 'worship')
+		{
+			switch (curStep)
+			{
+				case 515 | 643:
+					add(sarvTrail);
+					case 543 | 672:
+					remove(sarvTrail);
+			}
+		}
+		if (dad.curCharacter == 'ruv' && SONG.song.toLowerCase() == 'zavodila')
+		{
+			switch (curStep)
+			{
+				case 131 | 655 | 1047:
+					add(sarvTrail);
+				case 195 | 685 | 1111:
+					remove(sarvTrail);
+			}
+		}
+		if (dad.curCharacter == 'sarvente-lucifer' && SONG.song.toLowerCase() == 'gospel')
+		{
+			switch (curStep)
+			{
+				case 128 | 576 | 1153:
+					add(sarvTrail);
+				case 191 | 607 | 1276:
+					remove(sarvTrail);
+			}
+		}
+		if (dad.curCharacter == 'selever' && SONG.song.toLowerCase() == 'casanova')
+		{
+			switch (curStep)
+			{
+				case 129 | 385 | 448 | 768:
+					add(sarvTrail);
+				case 192 | 416 | 480 | 832:
+					remove(sarvTrail);
+			}
 		}
 
 		#if windows

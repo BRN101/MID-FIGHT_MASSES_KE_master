@@ -34,7 +34,8 @@ class StoryMenuState extends MusicBeatState
 			['Satin Panties', "High", "Milf"],
 			['Cocoa', 'Eggnog', 'Winter Horrorland'],
 			['Senpai', 'Roses', 'Thorns'],
-			['Parish', 'Worship', 'Zavodila', 'Gospel']
+			['Parish', 'Worship', 'Zavodila', 'Gospel'],
+			['Casanova']
 		];
 	}
 	var curDifficulty:Int = 1;
@@ -49,7 +50,8 @@ class StoryMenuState extends MusicBeatState
 		['mom', 'bf', 'gf'],
 		['parents-christmas', 'bf', 'gf'],
 		['senpai', 'bf', 'gf'],
-		['sarvente', 'bf', 'gf']
+		['sarvente', 'bf', 'gf'],
+		['selever', 'bf', 'gf']
 	];
 
 	var weekNames:Array<String> = CoolUtil.coolTextFile(Paths.txt('data/weekNames'));
@@ -72,7 +74,7 @@ class StoryMenuState extends MusicBeatState
 
 	function unlockWeeks():Array<Bool>
 	{
-		var weeks:Array<Bool> = [true, true, true, true, true, true, true, true];
+		var weeks:Array<Bool> = [true, true, true, true, true, true, true];
 		#if debug
 		for(i in 0...weekNames.length)
 			weeks.push(true);
@@ -392,11 +394,22 @@ class StoryMenuState extends MusicBeatState
 	{
 		curDifficulty += change;
 
-		if (curDifficulty < 0)
-			curDifficulty = 3;
-		if (curDifficulty > 3)
-			curDifficulty = 0;
-
+		if (curWeek == 8)
+		{
+			if (curDifficulty < 2)
+				curDifficulty = 3;
+			if (curDifficulty > 3)
+				curDifficulty = 2;
+		}
+		else
+		{
+			if (curDifficulty < 0)
+				curDifficulty = 3;
+			if (curDifficulty > 3)
+				curDifficulty = 0;
+	
+		}
+		
 		sprDifficulty.offset.x = 0;
 
 		switch (curDifficulty)
@@ -453,6 +466,11 @@ class StoryMenuState extends MusicBeatState
 		}
 
 		FlxG.sound.play(Paths.sound('scrollMenu'));
+
+		if (curWeek == 8)
+		{
+			changeDifficulty(3);
+		}
 
 		updateText();
 	}

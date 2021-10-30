@@ -133,6 +133,15 @@ class DialogueBox extends FlxSpriteGroup
 				box.height = 200;
 				box.x = -100;
 				box.y = 390;
+			case 'casanova':
+				hasDialog = true;
+				box.frames = Paths.getSparrowAtlas('speech_bubble_talking');
+				box.animation.addByPrefix('normalOpen', 'Speech Bubble Normal Open', 24, false);
+				box.animation.addByIndices('normal', 'speech bubble normal', [11], "", 24);
+				box.width = 200;
+				box.height = 200;
+				box.x = -100;
+				box.y = 390;
 		}
 
 		this.dialogueList = dialogueList;
@@ -151,7 +160,7 @@ class DialogueBox extends FlxSpriteGroup
 		 add(portraitLeft);
 		 portraitLeft.visible = false;
 		}
-		else if (PlayState.SONG.song.toLowerCase() == 'parish' || PlayState.SONG.song.toLowerCase() == 'worship' || PlayState.SONG.song.toLowerCase() == 'zavodila' || PlayState.SONG.song.toLowerCase() == 'gospel')
+		else if (PlayState.SONG.song.toLowerCase() == 'parish' || PlayState.SONG.song.toLowerCase() == 'worship' || PlayState.SONG.song.toLowerCase() == 'zavodila' || PlayState.SONG.song.toLowerCase() == 'gospel' || PlayState.SONG.song.toLowerCase() == 'casanova')
 		{
 		 portraitLeft = new FlxSprite(100, 100);
 		 portraitLeft.frames = Paths.getSparrowAtlas('');
@@ -174,7 +183,7 @@ class DialogueBox extends FlxSpriteGroup
 		 add(portraitRight);
 		 portraitRight.visible = false;
 		}
-		else if (PlayState.SONG.song.toLowerCase() == 'parish' || PlayState.SONG.song.toLowerCase() == 'worship' || PlayState.SONG.song.toLowerCase() == 'zavodila' || PlayState.SONG.song.toLowerCase() == 'gospel')
+		else if (PlayState.SONG.song.toLowerCase() == 'parish' || PlayState.SONG.song.toLowerCase() == 'worship' || PlayState.SONG.song.toLowerCase() == 'zavodila' || PlayState.SONG.song.toLowerCase() == 'gospel' || PlayState.SONG.song.toLowerCase() == 'casanova')
 		{
 		 portraitRight = new FlxSprite(700, 100);
 		 portraitRight.frames = Paths.getSparrowAtlas('portraits/BF', 'shared');
@@ -230,7 +239,7 @@ class DialogueBox extends FlxSpriteGroup
 		 // add(dialogue);
 		}
 			
-		else if (PlayState.SONG.song.toLowerCase() == 'parish' || PlayState.SONG.song.toLowerCase() == 'worship' || PlayState.SONG.song.toLowerCase() == 'zavodila' || PlayState.SONG.song.toLowerCase() == 'gospel')
+		else if (PlayState.SONG.song.toLowerCase() == 'parish' || PlayState.SONG.song.toLowerCase() == 'worship' || PlayState.SONG.song.toLowerCase() == 'zavodila' || PlayState.SONG.song.toLowerCase() == 'gospel' || PlayState.SONG.song.toLowerCase() == 'casanova')
 		{
 			dropText = new FlxText(242, 502, Std.int(FlxG.width * 0.6), "", 32);
 			dropText.font = 'Komika Display';
@@ -319,7 +328,7 @@ class DialogueBox extends FlxSpriteGroup
 				{
 					isEnding = true;
 
-					if (PlayState.SONG.song.toLowerCase() == 'senpai' || PlayState.SONG.song.toLowerCase() == 'thorns' || PlayState.SONG.song.toLowerCase() == 'parish' || PlayState.SONG.song.toLowerCase() == 'worship' || PlayState.SONG.song.toLowerCase() == 'zavodila' || PlayState.SONG.song.toLowerCase() == 'gospel')
+					if (PlayState.SONG.song.toLowerCase() == 'senpai' || PlayState.SONG.song.toLowerCase() == 'thorns' || PlayState.SONG.song.toLowerCase() == 'parish' || PlayState.SONG.song.toLowerCase() == 'worship' || PlayState.SONG.song.toLowerCase() == 'zavodila' || PlayState.SONG.song.toLowerCase() == 'gospel' || PlayState.SONG.song.toLowerCase() == 'casanova')
 						FlxG.sound.music.fadeOut(2.2, 0);
 
 					new FlxTimer().start(0.2, function(tmr:FlxTimer)
@@ -490,6 +499,42 @@ class DialogueBox extends FlxSpriteGroup
 				portraitRight.visible = false;
 				portraitMiddle.visible = false;
 				portraitLeft.frames = Paths.getSparrowAtlas('portraits/LuciSarv');
+				if (!portraitLeft.visible)
+				{
+					portraitLeft.visible = true;
+					portraitLeft.animation.play('enter');
+				}
+			case 'seluh':
+				portraitRight.visible = false;
+				portraitMiddle.visible = false;
+				portraitLeft.frames = Paths.getSparrowAtlas('portraits/SelUh');
+				if (!portraitLeft.visible)
+				{
+					portraitLeft.visible = true;
+					portraitLeft.animation.play('enter');
+				}
+			case 'selever':
+				portraitRight.visible = false;
+				portraitMiddle.visible = false;
+				portraitLeft.frames = Paths.getSparrowAtlas('portraits/SelTalk');
+				if (!portraitLeft.visible)
+				{
+					portraitLeft.visible = true;
+					portraitLeft.animation.play('enter');
+				}
+			case 'selxd':
+				portraitRight.visible = false;
+				portraitMiddle.visible = false;
+				portraitLeft.frames = Paths.getSparrowAtlas('portraits/SelXD');
+				if (!portraitLeft.visible)
+				{
+					portraitLeft.visible = true;
+					portraitLeft.animation.play('enter');
+				}
+			case 'brn':
+				portraitRight.visible = false;
+				portraitMiddle.visible = false;
+				portraitLeft.frames = Paths.getSparrowAtlas('portraits/BRN');
 				if (!portraitLeft.visible)
 				{
 					portraitLeft.visible = true;
